@@ -4,6 +4,8 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Set base for GitHub Pages if deploying to user.github.io/repo
+  base: process.env.GH_PAGES_BASE || '/',
   plugins: [
     react(),
     VitePWA({

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import './App.css'
-import { loadOrCreateDatabase, persistDatabase, run, exportDatabaseBlob, replaceDatabaseFromArrayBuffer, autoSchedule, getScheduleBetween } from './lib/sqlite'
+import { loadOrCreateDatabase, persistDatabase, run, exportDatabaseBlob, replaceDatabaseFromArrayBuffer, autoSchedule, getScheduleBetween, saveExternalDbHandle } from './lib/sqlite'
 import type { SqliteContext } from './lib/sqlite'
 
 type Recipe = { id: number; title: string; url?: string | null }
@@ -118,6 +118,7 @@ function App() {
         const file = await handle.getFile()
         const buf = await file.arrayBuffer()
         await replaceDatabaseFromArrayBuffer(buf)
+        await saveExternalDbHandle(handle)
       } else {
         const input = document.createElement('input')
         input.type = 'file'

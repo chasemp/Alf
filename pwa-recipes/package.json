@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:gh": "GH_PAGES_BASE=/$REPO_NAME npm run build && cp dist/index.html dist/404.html",
+    "deploy": "gh-pages -d dist -f",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -21,6 +23,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@types/node": "^24.3.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.0",
