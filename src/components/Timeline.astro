@@ -30,6 +30,13 @@ const sorted = [...items].sort((a, b) => new Date(b.timestamp).getTime() - new D
     </header>
     <div id="panel-content"></div>
   </aside>
+
+  <div id="tooltip" role="tooltip" hidden>
+    <div class="tooltip-card">
+      <div class="tooltip-title"></div>
+      <div class="tooltip-meta"></div>
+    </div>
+  </div>
 </section>
 
 <style>
@@ -54,6 +61,11 @@ const sorted = [...items].sort((a, b) => new Date(b.timestamp).getTime() - new D
     .timeline { grid-template-columns: 1fr; }
     .panel { position: fixed; inset: 12px; z-index: 50; }
   }
+
+  #tooltip { position: fixed; z-index: 60; pointer-events: none; }
+  .tooltip-card { background: var(--panel); border: 1px solid #1f2937; border-radius: 8px; padding: 8px 10px; box-shadow: 0 6px 18px rgba(0,0,0,0.35); max-width: 360px; }
+  .tooltip-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+  .tooltip-meta { font-size: 12px; color: var(--muted); }
  </style>
 
 <script id="__timeline_data__" type="application/json">{JSON.stringify(sorted)}</script>
@@ -96,6 +108,43 @@ const sorted = [...items].sort((a, b) => new Date(b.timestamp).getTime() - new D
 
   document.querySelectorAll('.card').forEach((btn) => {
     btn.addEventListener('click', () => openPanelFor((btn as HTMLElement).dataset.id!));
+  });
+
+  // Tooltip
+  const tooltip = document.getElementById('tooltip') as HTMLElement;
+  const ttTitle = tooltip.querySelector('.tooltip-title') as HTMLElement;
+  const ttMeta = tooltip.querySelector('.tooltip-meta') as HTMLElement;
+
+  function positionTooltip(rect: DOMRect) {
+    const gap = 10;
+    const top = Math.min(window.innerHeight - 80, Math.max(0, rect.top + window.scrollY + gap));
+    const left = Math.min(window.innerWidth - 380, Math.max(0, rect.left + window.scrollX + gap));
+    tooltip.style.top = `${top}px`;
+    tooltip.style.left = `${left}px`;
+  }
+
+  function showTooltipFor(el: HTMLElement) {
+    const id = el.dataset.id!;
+    const entry = (window as any).__TIMELINE__.find((i: any) => i.id === id);
+    if (!entry) return;
+    el.setAttribute('aria-describedby', 'tooltip');
+    ttTitle.textContent = entry.title || '';
+    const date = new Date(entry.timestamp).toLocaleString();
+    ttMeta.textContent = `${entry.type} · ${date}`;
+    positionTooltip(el.getBoundingClientRect());
+    tooltip.removeAttribute('hidden');
+  }
+  function hideTooltipFor(el: HTMLElement) {
+    el.removeAttribute('aria-describedby');
+    tooltip.setAttribute('hidden', '');
+  }
+
+  document.querySelectorAll('.card').forEach((el) => {
+    const h = el as HTMLElement;
+    h.addEventListener('mouseenter', () => showTooltipFor(h));
+    h.addEventListener('mouseleave', () => hideTooltipFor(h));
+    h.addEventListener('focus', () => showTooltipFor(h));
+    h.addEventListener('blur', () => hideTooltipFor(h));
   });
 
   (function bootstrapData(){
