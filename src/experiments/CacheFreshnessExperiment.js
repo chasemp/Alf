@@ -747,9 +747,13 @@ export class CacheFreshnessExperiment {
   async prefetchWithHeaders(resources, headers) {
     const results = [];
     
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173';
+    
     for (const resource of resources) {
       try {
-        const response = await fetch(resource, { headers });
+        // Convert relative URLs to absolute URLs
+        const absoluteUrl = resource.startsWith('http') ? resource : `${baseUrl}${resource}`;
+        const response = await fetch(absoluteUrl, { headers });
         results.push({
           resource: resource,
           success: response.ok,

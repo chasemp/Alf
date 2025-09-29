@@ -6,6 +6,7 @@
  */
 
 import { CacheBustingInvestigation } from '../src/integration/CacheBustingInvestigation.js';
+import '../src/utils/CachesMock.js';
 import { UpdatePromptTrigger } from '../src/strategies/UpdatePromptTrigger.js';
 import { CacheFreshnessExperiment } from '../src/experiments/CacheFreshnessExperiment.js';
 

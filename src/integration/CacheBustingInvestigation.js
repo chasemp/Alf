@@ -552,7 +552,7 @@ export class CacheBustingInvestigation {
         totalPhases: allResults.length,
         successfulPhases: successfulResults.length,
         failedPhases: failedResults.length,
-        successRate: (successfulPhases / totalPhases) * 100,
+        successRate: (successfulResults.length / allResults.length) * 100,
         totalDuration: allResults.reduce((sum, r) => sum + r.duration, 0),
         updatePromptEvents: updatePromptEvents.length
       },

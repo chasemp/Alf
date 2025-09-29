@@ -1,0 +1,294 @@
+{
+  "startTime": 1759154657820,
+  "endTime": 1759154681182,
+  "duration": 23362,
+  "tests": {
+    "updatePromptStrategies": {
+      "results": [
+        {
+          "strategy": "service-worker-version-bump",
+          "success": true,
+          "oldVersion": "v1.0.0",
+          "newVersion": "v1.0.1",
+          "details": {
+            "updateTriggered": true,
+            "cacheInvalidated": true,
+            "newContent": "const CACHE_VERSION = 'v1.0.1';"
+          }
+        },
+        {
+          "strategy": "cache-signature-invalidation",
+          "success": 3,
+          "signaturesModified": 3,
+          "details": {
+            "signaturesModified": 3,
+            "cachesInvalidated": true,
+            "freshRequestsTriggered": true
+          }
+        },
+        {
+          "strategy": "manifest-fingerprint-update",
+          "success": true,
+          "manifestUpdated": true,
+          "details": {
+            "manifestUpdated": true,
+            "appUpdateDetected": true,
+            "installPromptTriggered": true
+          }
+        },
+        {
+          "strategy": "prefetch-with-fresh-headers",
+          "success": false,
+          "resourcesPrefetched": 0,
+          "details": {
+            "resourcesPrefetched": 0,
+            "cacheBypassed": true,
+            "updateDetected": false
+          }
+        },
+        {
+          "strategy": "selective-cache-poisoning",
+          "success": false,
+          "error": "caches is not defined"
+        },
+        {
+          "strategy": "network-condition-simulation",
+          "success": 4,
+          "conditionsSimulated": 4,
+          "details": {
+            "conditionsSimulated": 4,
+            "cacheBypassed": true,
+            "freshContentLoaded": true
+          }
+        },
+        {
+          "strategy": "user-agent-fingerprint-busting",
+          "success": true,
+          "fingerprintChanged": true,
+          "details": {
+            "fingerprintChanged": true,
+            "cacheInvalidated": true,
+            "freshSessionStarted": true
+          }
+        },
+        {
+          "strategy": "time-based-cache-expiry",
+          "success": false,
+          "error": "caches is not defined"
+        }
+      ],
+      "summary": {
+        "totalStrategies": 8,
+        "successful": 5,
+        "failed": 3,
+        "duration": 3499.837596,
+        "mostEffective": {
+          "strategy": "service-worker-version-bump",
+          "success": true,
+          "oldVersion": "v1.0.0",
+          "newVersion": "v1.0.1",
+          "details": {
+            "updateTriggered": true,
+            "cacheInvalidated": true,
+            "newContent": "const CACHE_VERSION = 'v1.0.1';"
+          },
+          "score": 18
+        }
+      },
+      "timestamp": 1759154661336
+    },
+    "cacheFreshnessExperiments": {
+      "results": [
+        {
+          "experiment": "cache-timestamp-manipulation",
+          "success": false,
+          "duration": 0.1212350000000697,
+          "error": "caches is not defined",
+          "timestamp": 1759154661337
+        },
+        {
+          "experiment": "etag-regeneration",
+          "success": false,
+          "duration": 0.19204900000022462,
+          "error": "caches is not defined",
+          "timestamp": 1759154662339
+        },
+        {
+          "experiment": "last-modified-spoofing",
+          "success": false,
+          "duration": 0.2020589999992808,
+          "error": "caches is not defined",
+          "timestamp": 1759154663342
+        },
+        {
+          "experiment": "cache-control-override",
+          "success": false,
+          "duration": 0.23730700000032812,
+          "error": "caches is not defined",
+          "timestamp": 1759154664350
+        },
+        {
+          "experiment": "service-worker-cache-invalidation",
+          "success": false,
+          "duration": 0.15624099999968166,
+          "error": "caches is not defined",
+          "timestamp": 1759154665352
+        },
+        {
+          "experiment": "prefetch-with-fake-headers",
+          "success": true,
+          "duration": 7.412879999999859,
+          "resourcesPrefetched": 4,
+          "freshContentLoaded": true,
+          "timestamp": 1759154666362
+        },
+        {
+          "experiment": "conditional-request-bypass",
+          "success": true,
+          "duration": 0.19108199999936915,
+          "bypassesApplied": 2,
+          "freshRequestsTriggered": true,
+          "timestamp": 1759154667365
+        },
+        {
+          "experiment": "cache-vary-header-manipulation",
+          "success": false,
+          "duration": 0.16551699999945413,
+          "error": "caches is not defined",
+          "timestamp": 1759154668367
+        }
+      ],
+      "analysis": {
+        "totalExperiments": 8,
+        "successful": 2,
+        "failed": 6,
+        "successRate": 25,
+        "averageDuration": 1.0847962499997834,
+        "updatePromptEvents": 2,
+        "mostEffectiveExperiment": {
+          "experiment": "conditional-request-bypass",
+          "success": true,
+          "duration": 0.19108199999936915,
+          "bypassesApplied": 2,
+          "freshRequestsTriggered": true,
+          "timestamp": 1759154667365,
+          "score": 21
+        },
+        "recommendations": [
+          "Several experiments successfully triggered cache freshness detection",
+          "Consider implementing the most effective strategies in production",
+          "Some experiments failed - review error logs and consider alternative approaches",
+          "Monitor user experience when implementing these strategies",
+          "Test across different browsers and network conditions",
+          "Consider combining multiple strategies for maximum effectiveness"
+        ]
+      },
+      "updatePromptEvents": [
+        {
+          "experiment": "prefetch-with-fake-headers",
+          "timestamp": 1759154666362,
+          "details": {
+            "experiment": "prefetch-with-fake-headers",
+            "success": true,
+            "duration": 7.412879999999859,
+            "resourcesPrefetched": 4,
+            "freshContentLoaded": true,
+            "timestamp": 1759154666362
+          }
+        },
+        {
+          "experiment": "conditional-request-bypass",
+          "timestamp": 1759154667365,
+          "details": {
+            "experiment": "conditional-request-bypass",
+            "success": true,
+            "duration": 0.19108199999936915,
+            "bypassesApplied": 2,
+            "freshRequestsTriggered": true,
+            "timestamp": 1759154667365
+          }
+        }
+      ],
+      "summary": {
+        "totalExperiments": 8,
+        "successful": 2,
+        "failed": 6,
+        "duration": 8031.23244,
+        "updatePromptEvents": 2,
+        "mostEffective": {
+          "experiment": "conditional-request-bypass",
+          "success": true,
+          "duration": 0.19108199999936915,
+          "bypassesApplied": 2,
+          "freshRequestsTriggered": true,
+          "timestamp": 1759154667365,
+          "score": 21
+        }
+      },
+      "timestamp": 1759154669369
+    },
+    "completeInvestigation": {
+      "results": {
+        "investigation": "complete",
+        "success": false,
+        "duration": 11812.336457999998,
+        "error": "successfulPhases is not defined",
+        "timestamp": 1759154681181
+      },
+      "summary": {
+        "success": false,
+        "duration": 11812.459174000001,
+        "phasesCompleted": 0,
+        "updatePromptEvents": 9
+      },
+      "timestamp": 1759154681181
+    },
+    "performanceAnalysis": {
+      "metrics": {
+        "loadTime": 0.008089000002655666,
+        "memoryUsage": 102266927.71295604,
+        "cacheHitRatio": 0.5514056742197939,
+        "bandwidthUsage": 815308.5180391513
+      },
+      "summary": {
+        "duration": 0.07476000000315253,
+        "metrics": {
+          "loadTime": 0.008089000002655666,
+          "memoryUsage": 102266927.71295604,
+          "cacheHitRatio": 0.5514056742197939,
+          "bandwidthUsage": 815308.5180391513
+        },
+        "impact": {
+          "loadTimeImpact": "minimal",
+          "memoryImpact": "high",
+          "cacheEfficiency": "moderate",
+          "bandwidthImpact": "moderate"
+        }
+      },
+      "timestamp": 1759154681182
+    }
+  },
+  "summary": {
+    "totalTests": 4,
+    "successfulTests": 3,
+    "successRate": 75,
+    "totalStrategies": 16,
+    "successfulStrategies": 7,
+    "strategySuccessRate": 43.75,
+    "totalUpdatePromptEvents": 11,
+    "overallDuration": 23362
+  },
+  "recommendations": [
+    "✅ Update prompt trigger strategies are working effectively",
+    "🎯 Most effective strategy: service-worker-version-bump",
+    "📈 Strategy score: 18/10",
+    "✅ Cache freshness experiments are producing results",
+    "🚨 2 update prompt events triggered",
+    "❌ Complete investigation failed - review error logs",
+    "⚡ Performance impact is minimal - safe for production",
+    "🔍 Continue monitoring update prompt frequency",
+    "🧪 Test across different browsers and devices",
+    "📊 Implement production monitoring for cache busting strategies",
+    "👥 Gather user feedback on update prompt experience"
+  ]
+}
