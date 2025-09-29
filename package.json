@@ -14,7 +14,9 @@
     "lint:fix": "eslint src tests --fix",
     "analyze": "node scripts/analyze-cache-behavior.js",
     "benchmark": "node scripts/run-benchmarks.js",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist",
+    "deploy:production": "node scripts/deploy-production.js",
+    "production": "npm run deploy:production"
   },
   "keywords": [
     "pwa",
