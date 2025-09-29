@@ -1,254 +1,333 @@
-# GitHub Pages PWA Cache Busting Research
+# PWA Cache Busting Investigation Platform
 
-A comprehensive research platform for testing and implementing optimal cache busting strategies for Progressive Web Apps (PWAs) deployed on GitHub Pages.
+A comprehensive research platform for testing cache busting strategies that trigger immediate PWA update prompts by making cached content appear "new" to the system.
 
-## 🎯 Research Objectives
+## 🎯 Problem Statement
 
-This project explores various caching mechanisms, their boundaries, and their effects on PWA functionality to determine the best approaches for:
+Your PWA currently only prompts users for updates after a minute or so, likely due to:
+- Service worker cache strategies prioritizing cached content
+- Browser cache mechanisms serving stale content
+- Update detection relying on natural cache expiration
+- Lack of immediate freshness indicators
 
-- **Server-side cache busting** (GitHub Actions, build-time)
-- **Client-side cache busting** (Service Workers, runtime)
-- **Hybrid approaches** (versioning, token-based)
-- **PWA-specific considerations** (offline functionality vs. cache freshness)
+**Goal**: Trigger immediate update prompts by making the cache system believe content is fresh/new, forcing it to refresh from source and detect updates immediately.
 
 ## 🚀 Quick Start
 
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-- Modern browser with Service Worker support
-
-### Installation
-
+### 1. Install Dependencies
 ```bash
-# Clone the repository
-git clone <repository-url>
-cd github-pages-pwa-cache-busting-research
-
-# Install dependencies
 npm install
+```
 
-# Start development server
+### 2. Start Development Server
+```bash
 npm run dev
 ```
 
-### Available Scripts
+### 3. Open PWA in Browser
+Navigate to `http://localhost:5173` and install the PWA to test cache busting strategies.
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm test` - Run test suite
-- `npm run test:watch` - Run tests in watch mode
-- `npm run test:coverage` - Run tests with coverage
-- `npm run lint` - Run ESLint
-- `npm run analyze` - Analyze cache behavior
-- `npm run benchmark` - Run performance benchmarks
-- `npm run deploy` - Deploy to GitHub Pages
+### 4. Run Tests
+```bash
+# Run comprehensive test suite
+node scripts/run-cache-busting-tests.js
 
-## 📊 Research Structure
-
-### Project Architecture
-
-```
-/
-├── docs/                          # Research documentation
-│   ├── findings/                  # Test results and analysis
-│   ├── strategies/                # Detailed strategy documentation
-│   └── benchmarks/                # Performance benchmarks
-├── src/                           # Test PWA application
-│   ├── strategies/                # Different cache busting implementations
-│   │   ├── server-side/           # Server-side strategies
-│   │   ├── client-side/           # Client-side strategies
-│   │   └── hybrid/                # Hybrid approaches
-│   ├── components/                # PWA components
-│   ├── service-workers/           # Different SW implementations
-│   └── utils/                     # Testing utilities
-├── tests/                         # Automated test suites
-├── scripts/                       # Build and deployment scripts
-└── .github/workflows/             # GitHub Actions for testing
+# Or use the web interface buttons
 ```
 
-### Cache Busting Strategies
+## 🧪 Testing Strategies
 
-#### 1. Server-Side Strategies
+### Update Prompt Trigger Strategies
 
-- **Build-time versioning**: Timestamp, hash, semantic versioning
-- **GitHub Actions integration**: Automated cache invalidation
-- **Custom headers**: Cache control manipulation
-- **CDN cache purging**: External cache management
+#### 1. Service Worker Version Bump
+```javascript
+// Incrementally updates service worker version
+const CACHE_VERSION = 'v1.0.1'; // Increment from v1.0.0
+```
+**Expected Result**: Immediate service worker update triggers app refresh
 
-#### 2. Client-Side Strategies
+#### 2. Cache Signature Invalidation
+```javascript
+// Modify cache signatures to force fresh requests
+const signatures = {
+  'main.js': 'abc123_modified_' + Date.now(),
+  'style.css': 'def456_modified_' + Date.now()
+};
+```
+**Expected Result**: Cache system detects signature changes and fetches fresh content
 
-- **Service Worker cache management**: Different caching strategies
-- **Runtime token-based busting**: Dynamic cache invalidation
-- **Dynamic import strategies**: Code splitting and lazy loading
-- **Cache-first vs. network-first**: Performance optimization
+#### 3. ETag Regeneration
+```javascript
+// Generate new ETags to force fresh content requests
+const newETags = await generateNewETags(currentETags);
+```
+**Expected Result**: Conditional requests fail ETag validation, forcing fresh fetch
 
-#### 3. Hybrid Strategies
+#### 4. Last-Modified Spoofing
+```javascript
+// Spoof Last-Modified headers to make content appear recently updated
+const spoofedDates = generateSpoofedDates(currentLastModified);
+```
+**Expected Result**: System believes content is fresh, triggers update detection
 
-- **Version-aware service workers**: Smart cache strategy selection
-- **Progressive cache updates**: Selective cache invalidation
-- **Context-aware busting**: Network and device-specific strategies
+#### 5. Prefetch with Fresh Headers
+```javascript
+// Prefetch resources with headers that bypass cache
+const freshHeaders = {
+  'Cache-Control': 'no-cache',
+  'X-Fresh-Request': 'true',
+  'X-Timestamp': Date.now().toString()
+};
+```
+**Expected Result**: Fresh content loaded in background, triggers update detection
 
-## 🧪 Testing Framework
+### Cache Freshness Experiments
 
-### Automated Testing
+#### 1. Cache Timestamp Manipulation
+Manipulate cache timestamps to make content appear freshly cached.
 
-The project includes comprehensive test suites for:
+#### 2. Network Condition Simulation
+Simulate network conditions that trigger cache bypass.
 
-- **Unit Tests**: Individual strategy testing
-- **Integration Tests**: End-to-end scenario testing
-- **Performance Tests**: Load time and cache efficiency
-- **Regression Tests**: Ensure no functionality breaks
+#### 3. User Agent Fingerprint Busting
+Modify user agent fingerprint to appear as new client.
 
-### Manual Testing Scenarios
+#### 4. Time-based Cache Expiry
+Manipulate cache expiry times to force immediate refresh.
 
-- **Network Conditions**: Test under various network speeds
-- **Browser Compatibility**: Cross-browser testing
-- **Device Testing**: Mobile and desktop scenarios
-- **Edge Cases**: Offline/online transitions
+## 🔬 Advanced Testing Framework
 
-### Metrics Collection
+### Web Interface Testing
 
-- **Cache Hit Ratio**: Percentage of cache hits vs. misses
-- **Load Time**: Time to first contentful paint
-- **Bandwidth Usage**: Data transfer optimization
-- **User Experience**: Perceived performance metrics
+1. **Basic Cache Busting Tests**
+   - Click "Test Cache Busting" to run traditional strategies
+   - Click "Run Benchmarks" for performance analysis
+   - Click "Analyze Performance" for detailed metrics
 
-## 📈 Performance Monitoring
+2. **Advanced Update Prompt Testing**
+   - Click "Test Update Prompt Strategies" to test 8 advanced strategies
+   - Click "Test Cache Freshness Experiments" to run 8 cache manipulation experiments
+   - Click "Run Complete Investigation" for comprehensive analysis
 
-The application includes real-time performance monitoring:
+3. **Real-time Monitoring**
+   - Watch for update prompt notifications in the top-right corner
+   - Monitor performance metrics in real-time
+   - Track service worker status changes
 
-- **Cache Hit Ratio Tracking**: Monitor cache efficiency
-- **Load Time Analysis**: Track performance metrics
-- **Bandwidth Usage**: Monitor data transfer
-- **Service Worker Status**: Track SW performance
+### Command Line Testing
 
-## 🔧 Configuration
+```bash
+# Run comprehensive test suite
+node scripts/run-cache-busting-tests.js
 
-### Environment Variables
-
-Create a `.env` file in the root directory:
-
-```env
-# Cache busting configuration
-CACHE_BUST_STRATEGY=content-hash
-CACHE_TTL=3600
-ENABLE_SW_CACHING=true
-
-# Performance monitoring
-ENABLE_PERFORMANCE_MONITORING=true
-METRICS_INTERVAL=30000
-
-# GitHub Pages specific
-GITHUB_PAGES_CACHE_TTL=86400
+# This will:
+# 1. Test all update prompt trigger strategies
+# 2. Run cache freshness experiments
+# 3. Perform complete investigation
+# 4. Analyze performance impact
+# 5. Generate HTML and JSON reports
 ```
 
-### Service Worker Configuration
-
-The service worker can be configured for different caching strategies:
+### Programmatic Testing
 
 ```javascript
-// In vite.config.js
-VitePWA({
-  workbox: {
-    runtimeCaching: [
-      {
-        urlPattern: /^https:\/\/api\./,
-        handler: 'NetworkFirst',
-        options: {
-          cacheName: 'api-cache',
-          networkTimeoutSeconds: 3
-        }
-      }
-    ]
+import { CacheBustingInvestigation } from './src/integration/CacheBustingInvestigation.js';
+
+const investigation = new CacheBustingInvestigation();
+const results = await investigation.runCompleteInvestigation();
+
+console.log('Investigation Results:', results);
+```
+
+## 📊 Test Results & Metrics
+
+### Success Metrics
+- **Update Prompt Trigger Rate**: Percentage of successful update prompt triggers
+- **Time to Update Detection**: Time from strategy execution to update prompt
+- **User Update Acceptance Rate**: Percentage of users who accept updates
+
+### Performance Metrics
+- **Load Time Impact**: Effect on app loading performance
+- **Memory Usage**: RAM consumption changes
+- **Cache Hit Ratio**: Efficiency of cache strategies
+- **Bandwidth Usage**: Data transfer optimization
+
+### User Experience Metrics
+- **Update Prompt Frequency**: How often users see update prompts
+- **User Confusion Levels**: Impact on user understanding
+- **Perceived Performance**: User experience quality
+- **Satisfaction Scores**: Overall user satisfaction
+
+## 🎛️ Configuration Options
+
+### Service Worker Configuration
+```javascript
+// sw.js - Configure cache strategies
+const CACHE_VERSION = 'v1.0.0';
+const CACHE_NAME = `cache-busting-research-${CACHE_VERSION}`;
+
+// Choose caching strategy:
+// - 'cache-first': Offline-first approach
+// - 'network-first': Freshness-first approach  
+// - 'stale-while-revalidate': Balanced approach
+```
+
+### Test Configuration
+```javascript
+// Configure test parameters
+const testConfig = {
+  updatePromptFrequency: 'immediate', // or 'delayed'
+  cacheStrategy: 'stale-while-revalidate',
+  performanceThreshold: 1000, // ms
+  userExperienceMode: 'aggressive' // or 'conservative'
+};
+```
+
+## 🔍 Investigation Phases
+
+### Phase 1: Baseline Analysis
+- Document current cache behavior
+- Establish performance benchmarks
+- Identify update detection mechanisms
+
+### Phase 2: Strategy Testing
+- Test individual cache busting strategies
+- Measure effectiveness of each approach
+- Identify optimal parameters
+
+### Phase 3: Integration Testing
+- Test strategy combinations
+- Real-world scenario testing
+- Cross-browser compatibility
+
+### Phase 4: Performance Analysis
+- Analyze performance impact
+- User experience assessment
+- Bandwidth usage analysis
+
+## 📈 Expected Results
+
+### Target Metrics
+- **Update Prompt Trigger Rate**: >80%
+- **Time to Update Detection**: <5 seconds
+- **Performance Impact**: <10% increase in load time
+- **User Acceptance Rate**: >70%
+
+### Success Indicators
+- ✅ Immediate update prompts triggered
+- ✅ Fresh content loaded from source
+- ✅ Minimal performance impact
+- ✅ Positive user experience
+
+## 🛠️ Development
+
+### Project Structure
+```
+/
+├── src/
+│   ├── strategies/           # Update prompt trigger strategies
+│   ├── experiments/         # Cache freshness experiments
+│   ├── integration/         # Comprehensive investigation framework
+│   ├── service-workers/     # Service worker management
+│   └── utils/               # Testing utilities
+├── tests/                   # Test suites
+├── scripts/                 # Test runners and automation
+└── docs/                    # Documentation and reports
+```
+
+### Adding New Strategies
+
+1. **Create Strategy Class**
+```javascript
+// src/strategies/NewStrategy.js
+export class NewStrategy {
+  async execute() {
+    // Implement strategy logic
+    return { success: true, details: {} };
   }
-})
+}
+```
+
+2. **Add to Update Prompt Trigger**
+```javascript
+// src/strategies/UpdatePromptTrigger.js
+this.strategies['new-strategy'] = this.newStrategy.bind(this);
+```
+
+3. **Create Tests**
+```javascript
+// tests/NewStrategy.test.js
+describe('NewStrategy', () => {
+  test('should execute successfully', async () => {
+    const strategy = new NewStrategy();
+    const result = await strategy.execute();
+    expect(result.success).toBe(true);
+  });
+});
+```
+
+### Running Tests
+```bash
+# Run all tests
+npm test
+
+# Run specific test file
+npm test -- UpdatePromptTrigger.test.js
+
+# Run with coverage
+npm run test:coverage
+```
+
+## 🚨 Troubleshooting
+
+### Common Issues
+
+1. **Service Worker Not Updating**
+   - Check browser developer tools > Application > Service Workers
+   - Ensure `skipWaiting()` is called in install event
+   - Clear browser cache and reload
+
+2. **Update Prompts Not Triggering**
+   - Verify service worker is registered
+   - Check console for error messages
+   - Ensure strategies are executing successfully
+
+3. **Performance Issues**
+   - Monitor memory usage in developer tools
+   - Check network tab for excessive requests
+   - Adjust cache strategy parameters
+
+### Debug Mode
+```javascript
+// Enable debug logging
+localStorage.setItem('debug', 'true');
+
+// Check service worker status
+navigator.serviceWorker.getRegistrations().then(registrations => {
+  console.log('Service Worker Registrations:', registrations);
+});
 ```
 
 ## 📚 Documentation
 
-### Research Plan
-
-See [CACHE_BUSTING_RESEARCH_PLAN.md](./CACHE_BUSTING_RESEARCH_PLAN.md) for detailed research methodology and objectives.
-
-### Strategy Documentation
-
-Each cache busting strategy includes:
-
-- **Implementation details**: How the strategy works
-- **Performance characteristics**: Expected performance impact
-- **Use cases**: When to use this strategy
-- **Best practices**: Optimization tips and common pitfalls
-
-### Findings
-
-Research findings are documented in the `docs/findings/` directory:
-
-- **Performance benchmarks**: Comparative analysis of strategies
-- **Real-world scenarios**: Testing under various conditions
-- **Recommendations**: Best practices and optimization tips
+- [Cache Busting Investigation Plan](./PWA_CACHE_BUSTING_INVESTIGATION_PLAN.md)
+- [Original Research Plan](./CACHE_BUSTING_RESEARCH_PLAN.md)
+- [API Documentation](./docs/api.md)
+- [Strategy Guide](./docs/strategies.md)
 
 ## 🤝 Contributing
 
-### For Researchers
-
-1. Review the current findings in `docs/findings/`
-2. Check the status of ongoing research in the research plan
-3. Pick an unassigned strategy or create a new research area
-4. Update progress in the research plan as you work
-
-### For Developers
-
-1. Review the implementation examples in `src/strategies/`
-2. Test different strategies using the provided test framework
-3. Contribute improvements and new approaches
-4. Document your findings and recommendations
-
-### For Contributors
-
 1. Fork the repository
-2. Create a feature branch for your research area
-3. Implement and test your strategy
-4. Submit a pull request with documentation
+2. Create a feature branch
+3. Implement your strategy or experiment
+4. Add comprehensive tests
+5. Submit a pull request
 
-## 📊 Progress Tracking
-
-### Status Indicators
-
-- ✅ **Completed**: Fully implemented and tested
-- 🚧 **In Progress**: Currently being worked on
-- 📋 **Planned**: Scheduled for implementation
-- ❌ **Blocked**: Waiting on dependencies or decisions
-- 🔍 **Research**: Investigation phase
-
-### Current Status
-
-- 🚧 **Research Phase**: Setting up testing framework
-- 📋 **Next Milestone**: Complete baseline analysis and implement first test strategies
-
-## 🎯 Expected Deliverables
-
-### 1. Research Documentation
-- Comprehensive analysis of GitHub Pages caching behavior
-- Detailed comparison of different cache busting strategies
-- Performance benchmarks and recommendations
-
-### 2. Implementation Examples
-- Working code examples for each strategy
-- Best practice guidelines
-- Common pitfalls and solutions
-
-### 3. Testing Framework
-- Automated test suites
-- Manual testing procedures
-- Performance monitoring tools
-
-### 4. Recommendations
-- Strategy selection guidelines
-- Performance optimization tips
-- PWA-specific considerations
+### Contribution Guidelines
+- Follow existing code style
+- Add tests for new functionality
+- Update documentation
+- Ensure cross-browser compatibility
 
 ## 📄 License
 
@@ -256,12 +335,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- GitHub Pages team for providing the hosting platform
-- Workbox team for the excellent PWA tooling
-- Web Performance community for research insights
+- Service Worker API documentation
+- PWA best practices community
+- Cache busting research contributors
+- Browser vendor implementations
 
 ---
 
-**Last Updated**: [To be updated as research progresses]
-**Current Status**: 🚧 Research Phase - Setting up testing framework
-**Next Milestone**: Complete baseline analysis and implement first test strategies
+**Ready to test?** Start with the web interface by clicking "Test Update Prompt Strategies" or run the comprehensive test suite with `node scripts/run-cache-busting-tests.js`!
