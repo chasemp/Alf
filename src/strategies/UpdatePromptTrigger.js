@@ -353,9 +353,13 @@ export class UpdatePromptTrigger {
   async prefetchWithHeaders(resources, headers) {
     // Prefetch resources with fresh headers
     let prefetched = 0;
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173';
+    
     for (const resource of resources) {
       try {
-        await fetch(resource, { headers });
+        // Convert relative URLs to absolute URLs
+        const absoluteUrl = resource.startsWith('http') ? resource : `${baseUrl}${resource}`;
+        await fetch(absoluteUrl, { headers });
         prefetched++;
       } catch (error) {
         console.warn(`Failed to prefetch ${resource}:`, error);

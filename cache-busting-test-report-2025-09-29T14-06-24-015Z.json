@@ -1,0 +1,898 @@
+{
+  "startTime": 1759154758509,
+  "endTime": 1759154784014,
+  "duration": 25505,
+  "tests": {
+    "updatePromptStrategies": {
+      "results": [
+        {
+          "strategy": "service-worker-version-bump",
+          "success": true,
+          "oldVersion": "v1.0.0",
+          "newVersion": "v1.0.1",
+          "details": {
+            "updateTriggered": true,
+            "cacheInvalidated": true,
+            "newContent": "const CACHE_VERSION = 'v1.0.1';"
+          }
+        },
+        {
+          "strategy": "cache-signature-invalidation",
+          "success": 3,
+          "signaturesModified": 3,
+          "details": {
+            "signaturesModified": 3,
+            "cachesInvalidated": true,
+            "freshRequestsTriggered": true
+          }
+        },
+        {
+          "strategy": "manifest-fingerprint-update",
+          "success": true,
+          "manifestUpdated": true,
+          "details": {
+            "manifestUpdated": true,
+            "appUpdateDetected": true,
+            "installPromptTriggered": true
+          }
+        },
+        {
+          "strategy": "prefetch-with-fresh-headers",
+          "success": false,
+          "resourcesPrefetched": 0,
+          "details": {
+            "resourcesPrefetched": 0,
+            "cacheBypassed": true,
+            "updateDetected": false
+          }
+        },
+        {
+          "strategy": "selective-cache-poisoning",
+          "success": false,
+          "targetsPoisoned": 0,
+          "details": {
+            "targetsPoisoned": 0,
+            "cacheInvalidated": false,
+            "updateForced": false
+          }
+        },
+        {
+          "strategy": "network-condition-simulation",
+          "success": 4,
+          "conditionsSimulated": 4,
+          "details": {
+            "conditionsSimulated": 4,
+            "cacheBypassed": true,
+            "freshContentLoaded": true
+          }
+        },
+        {
+          "strategy": "user-agent-fingerprint-busting",
+          "success": true,
+          "fingerprintChanged": true,
+          "details": {
+            "fingerprintChanged": true,
+            "cacheInvalidated": true,
+            "freshSessionStarted": true
+          }
+        },
+        {
+          "strategy": "time-based-cache-expiry",
+          "success": false,
+          "entriesExpired": 0,
+          "details": {
+            "entriesExpired": 0,
+            "cacheRefreshed": false,
+            "updateTriggered": false
+          }
+        }
+      ],
+      "summary": {
+        "totalStrategies": 8,
+        "successful": 5,
+        "failed": 3,
+        "duration": 4625.997756999999,
+        "mostEffective": {
+          "strategy": "service-worker-version-bump",
+          "success": true,
+          "oldVersion": "v1.0.0",
+          "newVersion": "v1.0.1",
+          "details": {
+            "updateTriggered": true,
+            "cacheInvalidated": true,
+            "newContent": "const CACHE_VERSION = 'v1.0.1';"
+          },
+          "score": 18
+        }
+      },
+      "timestamp": 1759154763148
+    },
+    "cacheFreshnessExperiments": {
+      "results": [
+        {
+          "experiment": "cache-timestamp-manipulation",
+          "success": false,
+          "duration": 0.17271400000026915,
+          "entriesManipulated": 0,
+          "updateDetected": false,
+          "timestamp": 1759154763149
+        },
+        {
+          "experiment": "etag-regeneration",
+          "success": true,
+          "duration": 0.21180699999968056,
+          "etagsRegenerated": 0,
+          "freshRequestsTriggered": true,
+          "timestamp": 1759154764152
+        },
+        {
+          "experiment": "last-modified-spoofing",
+          "success": false,
+          "duration": 0.28272500000002765,
+          "datesSpoofed": 0,
+          "updateDetected": false,
+          "timestamp": 1759154765156
+        },
+        {
+          "experiment": "cache-control-override",
+          "success": true,
+          "duration": 0.2001510000000053,
+          "overridesApplied": 0,
+          "revalidationTriggered": true,
+          "timestamp": 1759154766157
+        },
+        {
+          "experiment": "service-worker-cache-invalidation",
+          "success": true,
+          "duration": 0.18564599999990605,
+          "cachesInvalidated": 0,
+          "swUpdateTriggered": true,
+          "timestamp": 1759154767159
+        },
+        {
+          "experiment": "prefetch-with-fake-headers",
+          "success": true,
+          "duration": 33.77574699999968,
+          "resourcesPrefetched": 4,
+          "freshContentLoaded": true,
+          "timestamp": 1759154768195
+        },
+        {
+          "experiment": "conditional-request-bypass",
+          "success": true,
+          "duration": 0.1736670000009326,
+          "bypassesApplied": 2,
+          "freshRequestsTriggered": true,
+          "timestamp": 1759154769197
+        },
+        {
+          "experiment": "cache-vary-header-manipulation",
+          "success": true,
+          "duration": 0.22279400000115857,
+          "headersManipulated": 0,
+          "cacheBehaviorChanged": true,
+          "timestamp": 1759154770199
+        }
+      ],
+      "analysis": {
+        "totalExperiments": 8,
+        "successful": 6,
+        "failed": 2,
+        "successRate": 75,
+        "averageDuration": 4.403156375000208,
+        "updatePromptEvents": 6,
+        "mostEffectiveExperiment": {
+          "experiment": "service-worker-cache-invalidation",
+          "success": true,
+          "duration": 0.18564599999990605,
+          "cachesInvalidated": 0,
+          "swUpdateTriggered": true,
+          "timestamp": 1759154767159,
+          "score": 23
+        },
+        "recommendations": [
+          "Several experiments successfully triggered cache freshness detection",
+          "Consider implementing the most effective strategies in production",
+          "Some experiments failed - review error logs and consider alternative approaches",
+          "Monitor user experience when implementing these strategies",
+          "Test across different browsers and network conditions",
+          "Consider combining multiple strategies for maximum effectiveness"
+        ]
+      },
+      "updatePromptEvents": [
+        {
+          "experiment": "etag-regeneration",
+          "timestamp": 1759154764152,
+          "details": {
+            "experiment": "etag-regeneration",
+            "success": true,
+            "duration": 0.21180699999968056,
+            "etagsRegenerated": 0,
+            "freshRequestsTriggered": true,
+            "timestamp": 1759154764152
+          }
+        },
+        {
+          "experiment": "cache-control-override",
+          "timestamp": 1759154766157,
+          "details": {
+            "experiment": "cache-control-override",
+            "success": true,
+            "duration": 0.2001510000000053,
+            "overridesApplied": 0,
+            "revalidationTriggered": true,
+            "timestamp": 1759154766157
+          }
+        },
+        {
+          "experiment": "service-worker-cache-invalidation",
+          "timestamp": 1759154767159,
+          "details": {
+            "experiment": "service-worker-cache-invalidation",
+            "success": true,
+            "duration": 0.18564599999990605,
+            "cachesInvalidated": 0,
+            "swUpdateTriggered": true,
+            "timestamp": 1759154767159
+          }
+        },
+        {
+          "experiment": "prefetch-with-fake-headers",
+          "timestamp": 1759154768195,
+          "details": {
+            "experiment": "prefetch-with-fake-headers",
+            "success": true,
+            "duration": 33.77574699999968,
+            "resourcesPrefetched": 4,
+            "freshContentLoaded": true,
+            "timestamp": 1759154768195
+          }
+        },
+        {
+          "experiment": "conditional-request-bypass",
+          "timestamp": 1759154769197,
+          "details": {
+            "experiment": "conditional-request-bypass",
+            "success": true,
+            "duration": 0.1736670000009326,
+            "bypassesApplied": 2,
+            "freshRequestsTriggered": true,
+            "timestamp": 1759154769197
+          }
+        },
+        {
+          "experiment": "cache-vary-header-manipulation",
+          "timestamp": 1759154770199,
+          "details": {
+            "experiment": "cache-vary-header-manipulation",
+            "success": true,
+            "duration": 0.22279400000115857,
+            "headersManipulated": 0,
+            "cacheBehaviorChanged": true,
+            "timestamp": 1759154770199
+          }
+        }
+      ],
+      "summary": {
+        "totalExperiments": 8,
+        "successful": 6,
+        "failed": 2,
+        "duration": 8051.409247999999,
+        "updatePromptEvents": 6,
+        "mostEffective": {
+          "experiment": "service-worker-cache-invalidation",
+          "success": true,
+          "duration": 0.18564599999990605,
+          "cachesInvalidated": 0,
+          "swUpdateTriggered": true,
+          "timestamp": 1759154767159,
+          "score": 23
+        }
+      },
+      "timestamp": 1759154771201
+    },
+    "completeInvestigation": {
+      "results": {
+        "investigation": "complete",
+        "success": true,
+        "duration": 12812.255323000001,
+        "timestamp": 1759154784014,
+        "phases": {
+          "baseline": {
+            "phase": "baseline-analysis",
+            "success": false,
+            "duration": 0.1905429999987973,
+            "error": "window is not defined",
+            "timestamp": 1759154771202
+          },
+          "strategy": {
+            "phase": "strategy-testing",
+            "success": true,
+            "duration": 12787.671971000002,
+            "timestamp": 1759154783990,
+            "data": {
+              "updatePromptStrategies": [
+                {
+                  "strategy": "service-worker-version-bump",
+                  "success": true,
+                  "oldVersion": "v1.0.0",
+                  "newVersion": "v1.0.1",
+                  "details": {
+                    "updateTriggered": true,
+                    "cacheInvalidated": true,
+                    "newContent": "const CACHE_VERSION = 'v1.0.1';"
+                  }
+                },
+                {
+                  "strategy": "cache-signature-invalidation",
+                  "success": 3,
+                  "signaturesModified": 3,
+                  "details": {
+                    "signaturesModified": 3,
+                    "cachesInvalidated": true,
+                    "freshRequestsTriggered": true
+                  }
+                },
+                {
+                  "strategy": "manifest-fingerprint-update",
+                  "success": true,
+                  "manifestUpdated": true,
+                  "details": {
+                    "manifestUpdated": true,
+                    "appUpdateDetected": true,
+                    "installPromptTriggered": true
+                  }
+                },
+                {
+                  "strategy": "prefetch-with-fresh-headers",
+                  "success": false,
+                  "resourcesPrefetched": 0,
+                  "details": {
+                    "resourcesPrefetched": 0,
+                    "cacheBypassed": true,
+                    "updateDetected": false
+                  }
+                },
+                {
+                  "strategy": "selective-cache-poisoning",
+                  "success": false,
+                  "targetsPoisoned": 0,
+                  "details": {
+                    "targetsPoisoned": 0,
+                    "cacheInvalidated": false,
+                    "updateForced": false
+                  }
+                },
+                {
+                  "strategy": "network-condition-simulation",
+                  "success": 4,
+                  "conditionsSimulated": 4,
+                  "details": {
+                    "conditionsSimulated": 4,
+                    "cacheBypassed": true,
+                    "freshContentLoaded": true
+                  }
+                },
+                {
+                  "strategy": "user-agent-fingerprint-busting",
+                  "success": true,
+                  "fingerprintChanged": true,
+                  "details": {
+                    "fingerprintChanged": true,
+                    "cacheInvalidated": true,
+                    "freshSessionStarted": true
+                  }
+                },
+                {
+                  "strategy": "time-based-cache-expiry",
+                  "success": false,
+                  "entriesExpired": 0,
+                  "details": {
+                    "entriesExpired": 0,
+                    "cacheRefreshed": false,
+                    "updateTriggered": false
+                  }
+                }
+              ],
+              "freshnessExperiments": [
+                {
+                  "experiment": "cache-timestamp-manipulation",
+                  "success": false,
+                  "duration": 0.02348399999755202,
+                  "entriesManipulated": 0,
+                  "updateDetected": false,
+                  "timestamp": 1759154775647
+                },
+                {
+                  "experiment": "etag-regeneration",
+                  "success": true,
+                  "duration": 0.05743400000210386,
+                  "etagsRegenerated": 0,
+                  "freshRequestsTriggered": true,
+                  "timestamp": 1759154776649
+                },
+                {
+                  "experiment": "last-modified-spoofing",
+                  "success": false,
+                  "duration": 0.061022999998385785,
+                  "datesSpoofed": 0,
+                  "updateDetected": false,
+                  "timestamp": 1759154777651
+                },
+                {
+                  "experiment": "cache-control-override",
+                  "success": true,
+                  "duration": 0.05438299999877927,
+                  "overridesApplied": 0,
+                  "revalidationTriggered": true,
+                  "timestamp": 1759154778653
+                },
+                {
+                  "experiment": "service-worker-cache-invalidation",
+                  "success": true,
+                  "duration": 0.033123999997769715,
+                  "cachesInvalidated": 0,
+                  "swUpdateTriggered": true,
+                  "timestamp": 1759154779654
+                },
+                {
+                  "experiment": "prefetch-with-fake-headers",
+                  "success": true,
+                  "duration": 14.609093999999459,
+                  "resourcesPrefetched": 4,
+                  "freshContentLoaded": true,
+                  "timestamp": 1759154780670
+                },
+                {
+                  "experiment": "conditional-request-bypass",
+                  "success": true,
+                  "duration": 0.041556000000127824,
+                  "bypassesApplied": 2,
+                  "freshRequestsTriggered": true,
+                  "timestamp": 1759154781672
+                },
+                {
+                  "experiment": "cache-vary-header-manipulation",
+                  "success": true,
+                  "duration": 0.050944000002346,
+                  "headersManipulated": 0,
+                  "cacheBehaviorChanged": true,
+                  "timestamp": 1759154782673
+                }
+              ],
+              "traditionalStrategies": [
+                {
+                  "strategy": "timestamp",
+                  "success": true,
+                  "duration": 59.801321999999345,
+                  "result": {
+                    "method": "timestamp",
+                    "url": "/api/test-data?t=1759154783675",
+                    "cacheBustValue": 1759154783675,
+                    "response": {
+                      "url": "/api/test-data?t=1759154783675",
+                      "status": 200,
+                      "headers": {
+                        "cache-control": "max-age=3600",
+                        "etag": "\"1759154783735\""
+                      },
+                      "data": {
+                        "message": "Test data",
+                        "timestamp": 1759154783735,
+                        "url": "/api/test-data?t=1759154783675"
+                      }
+                    }
+                  },
+                  "timestamp": "2025-09-29T14:06:23.735Z"
+                },
+                {
+                  "strategy": "random-token",
+                  "success": true,
+                  "duration": 117.36938400000145,
+                  "result": {
+                    "method": "random-token",
+                    "url": "/api/test-data?cb=nbi68ma1d",
+                    "cacheBustValue": "nbi68ma1d",
+                    "response": {
+                      "url": "/api/test-data?cb=nbi68ma1d",
+                      "status": 200,
+                      "headers": {
+                        "cache-control": "max-age=3600",
+                        "etag": "\"1759154783853\""
+                      },
+                      "data": {
+                        "message": "Test data",
+                        "timestamp": 1759154783853,
+                        "url": "/api/test-data?cb=nbi68ma1d"
+                      }
+                    }
+                  },
+                  "timestamp": "2025-09-29T14:06:23.853Z"
+                },
+                {
+                  "strategy": "content-hash",
+                  "success": true,
+                  "duration": 54.7159900000006,
+                  "result": {
+                    "method": "content-hash",
+                    "url": "/api/test-data?h=de4a6c002c8a18fa62d4b9587756d3deeb3d887ad65a8f372e46e1c031929715",
+                    "cacheBustValue": "de4a6c002c8a18fa62d4b9587756d3deeb3d887ad65a8f372e46e1c031929715",
+                    "content": "test-content-1759154783854",
+                    "response": {
+                      "url": "/api/test-data?h=de4a6c002c8a18fa62d4b9587756d3deeb3d887ad65a8f372e46e1c031929715",
+                      "status": 200,
+                      "headers": {
+                        "cache-control": "max-age=3600",
+                        "etag": "\"1759154783908\""
+                      },
+                      "data": {
+                        "message": "Test data",
+                        "timestamp": 1759154783908,
+                        "url": "/api/test-data?h=de4a6c002c8a18fa62d4b9587756d3deeb3d887ad65a8f372e46e1c031929715"
+                      }
+                    }
+                  },
+                  "timestamp": "2025-09-29T14:06:23.908Z"
+                },
+                {
+                  "strategy": "version-based",
+                  "success": true,
+                  "duration": 80.73928399999932,
+                  "result": {
+                    "method": "version-based",
+                    "url": "/api/test-data?v=1.0.0&b=1759154783",
+                    "version": "1.0.0",
+                    "buildNumber": 1759154783,
+                    "response": {
+                      "url": "/api/test-data?v=1.0.0&b=1759154783",
+                      "status": 200,
+                      "headers": {
+                        "cache-control": "max-age=3600",
+                        "etag": "\"1759154783989\""
+                      },
+                      "data": {
+                        "message": "Test data",
+                        "timestamp": 1759154783989,
+                        "url": "/api/test-data?v=1.0.0&b=1759154783"
+                      }
+                    }
+                  },
+                  "timestamp": "2025-09-29T14:06:23.989Z"
+                }
+              ]
+            }
+          },
+          "integration": {
+            "phase": "integration-testing",
+            "success": true,
+            "duration": 15.970706000000064,
+            "timestamp": 1759154784006,
+            "data": {
+              "combinedStrategies": [
+                {
+                  "combination": [
+                    "service-worker-version-bump",
+                    "cache-signature-invalidation"
+                  ],
+                  "success": true,
+                  "results": [
+                    {
+                      "strategy": "service-worker-version-bump",
+                      "success": true,
+                      "oldVersion": "v1.0.0",
+                      "newVersion": "v1.0.1",
+                      "details": {
+                        "updateTriggered": true,
+                        "cacheInvalidated": true,
+                        "newContent": "const CACHE_VERSION = 'v1.0.1';"
+                      }
+                    },
+                    {
+                      "strategy": "cache-signature-invalidation",
+                      "success": 3,
+                      "signaturesModified": 3,
+                      "details": {
+                        "signaturesModified": 3,
+                        "cachesInvalidated": true,
+                        "freshRequestsTriggered": true
+                      }
+                    }
+                  ]
+                },
+                {
+                  "combination": [
+                    "etag-regeneration",
+                    "last-modified-spoofing"
+                  ],
+                  "success": true,
+                  "results": [
+                    {
+                      "experiment": "etag-regeneration",
+                      "success": true,
+                      "duration": 0.021166999998968095,
+                      "etagsRegenerated": 0,
+                      "freshRequestsTriggered": true,
+                      "timestamp": 1759154783991
+                    },
+                    {
+                      "experiment": "last-modified-spoofing",
+                      "success": false,
+                      "duration": 0.015851000000111526,
+                      "datesSpoofed": 0,
+                      "updateDetected": false,
+                      "timestamp": 1759154783991
+                    }
+                  ]
+                },
+                {
+                  "combination": [
+                    "prefetch-with-fresh-headers",
+                    "conditional-request-bypass"
+                  ],
+                  "success": true,
+                  "results": [
+                    {
+                      "strategy": "prefetch-with-fresh-headers",
+                      "success": false,
+                      "resourcesPrefetched": 0,
+                      "details": {
+                        "resourcesPrefetched": 0,
+                        "cacheBypassed": true,
+                        "updateDetected": false
+                      }
+                    },
+                    {
+                      "experiment": "conditional-request-bypass",
+                      "success": true,
+                      "duration": 0.019373000002815388,
+                      "bypassesApplied": 2,
+                      "freshRequestsTriggered": true,
+                      "timestamp": 1759154784005
+                    }
+                  ]
+                }
+              ],
+              "realWorldScenarios": [
+                {
+                  "scenario": "user-opens-app-after-update",
+                  "success": true,
+                  "updatePromptTriggered": false,
+                  "duration": 1263.874288615983
+                },
+                {
+                  "scenario": "user-refreshes-page",
+                  "success": true,
+                  "updatePromptTriggered": false,
+                  "duration": 881.8341304559476
+                },
+                {
+                  "scenario": "user-navigates-between-pages",
+                  "success": true,
+                  "updatePromptTriggered": false,
+                  "duration": 1130.5819197470305
+                },
+                {
+                  "scenario": "user-goes-offline-and-back-online",
+                  "success": true,
+                  "updatePromptTriggered": true,
+                  "duration": 699.0644977114355
+                }
+              ],
+              "crossBrowserCompatibility": [
+                {
+                  "browser": "chrome",
+                  "success": true,
+                  "compatibility": "good",
+                  "issues": []
+                },
+                {
+                  "browser": "firefox",
+                  "success": true,
+                  "compatibility": "good",
+                  "issues": []
+                },
+                {
+                  "browser": "safari",
+                  "success": true,
+                  "compatibility": "good",
+                  "issues": []
+                },
+                {
+                  "browser": "edge",
+                  "success": true,
+                  "compatibility": "good",
+                  "issues": []
+                }
+              ]
+            }
+          },
+          "performance": {
+            "phase": "performance-analysis",
+            "success": true,
+            "duration": 7.272340999999869,
+            "timestamp": 1759154784013,
+            "data": {
+              "performanceImpact": {
+                "loadTimeImpact": "minimal",
+                "memoryUsageImpact": "low",
+                "cpuUsageImpact": "low",
+                "batteryImpact": "minimal"
+              },
+              "userExperienceImpact": {
+                "updatePromptFrequency": "optimal",
+                "userConfusion": "low",
+                "perceivedPerformance": "good",
+                "satisfaction": "high"
+              },
+              "bandwidthAnalysis": {
+                "additionalBandwidth": "minimal",
+                "cacheEfficiency": "high",
+                "dataSavings": "significant",
+                "costImpact": "low"
+              }
+            }
+          }
+        },
+        "report": {
+          "summary": {
+            "totalPhases": 4,
+            "successfulPhases": 3,
+            "failedPhases": 1,
+            "successRate": 75,
+            "totalDuration": 12811.105561,
+            "updatePromptEvents": 11
+          },
+          "findings": {
+            "mostEffectiveStrategy": {
+              "strategy": "service-worker-version-bump",
+              "success": true,
+              "oldVersion": "v1.0.0",
+              "newVersion": "v1.0.1",
+              "details": {
+                "updateTriggered": true,
+                "cacheInvalidated": true,
+                "newContent": "const CACHE_VERSION = 'v1.0.1';"
+              },
+              "score": 18
+            },
+            "mostEffectiveExperiment": {
+              "experiment": "service-worker-cache-invalidation",
+              "success": true,
+              "duration": 0.033123999997769715,
+              "cachesInvalidated": 0,
+              "swUpdateTriggered": true,
+              "timestamp": 1759154779654,
+              "score": 23
+            },
+            "updatePromptFrequency": 11,
+            "performanceImpact": "minimal",
+            "userExperienceImpact": "positive"
+          },
+          "recommendations": [
+            "Several strategies successfully triggered update prompts",
+            "Consider implementing the most effective strategies in production",
+            "Monitor update prompt frequency to avoid user annoyance",
+            "Test strategies across different browsers and devices",
+            "Consider user preferences for update notifications",
+            "Implement gradual rollout for new cache busting strategies"
+          ],
+          "nextSteps": [
+            "Implement recommended strategies in production environment",
+            "Set up monitoring for update prompt effectiveness",
+            "Conduct user testing for update prompt UX",
+            "Document best practices for PWA cache busting",
+            "Create automated testing for cache busting strategies"
+          ],
+          "timestamp": 1759154784014
+        }
+      },
+      "summary": {
+        "success": true,
+        "duration": 12812.390067,
+        "phasesCompleted": 4,
+        "updatePromptEvents": 11,
+        "report": {
+          "summary": {
+            "totalPhases": 4,
+            "successfulPhases": 3,
+            "failedPhases": 1,
+            "successRate": 75,
+            "totalDuration": 12811.105561,
+            "updatePromptEvents": 11
+          },
+          "findings": {
+            "mostEffectiveStrategy": {
+              "strategy": "service-worker-version-bump",
+              "success": true,
+              "oldVersion": "v1.0.0",
+              "newVersion": "v1.0.1",
+              "details": {
+                "updateTriggered": true,
+                "cacheInvalidated": true,
+                "newContent": "const CACHE_VERSION = 'v1.0.1';"
+              },
+              "score": 18
+            },
+            "mostEffectiveExperiment": {
+              "experiment": "service-worker-cache-invalidation",
+              "success": true,
+              "duration": 0.033123999997769715,
+              "cachesInvalidated": 0,
+              "swUpdateTriggered": true,
+              "timestamp": 1759154779654,
+              "score": 23
+            },
+            "updatePromptFrequency": 11,
+            "performanceImpact": "minimal",
+            "userExperienceImpact": "positive"
+          },
+          "recommendations": [
+            "Several strategies successfully triggered update prompts",
+            "Consider implementing the most effective strategies in production",
+            "Monitor update prompt frequency to avoid user annoyance",
+            "Test strategies across different browsers and devices",
+            "Consider user preferences for update notifications",
+            "Implement gradual rollout for new cache busting strategies"
+          ],
+          "nextSteps": [
+            "Implement recommended strategies in production environment",
+            "Set up monitoring for update prompt effectiveness",
+            "Conduct user testing for update prompt UX",
+            "Document best practices for PWA cache busting",
+            "Create automated testing for cache busting strategies"
+          ],
+          "timestamp": 1759154784014
+        }
+      },
+      "timestamp": 1759154784014
+    },
+    "performanceAnalysis": {
+      "metrics": {
+        "loadTime": 0.008805000001302687,
+        "memoryUsage": 20328307.493430097,
+        "cacheHitRatio": 0.6324423105940511,
+        "bandwidthUsage": 789379.0873227413
+      },
+      "summary": {
+        "duration": 0.07825600000069244,
+        "metrics": {
+          "loadTime": 0.008805000001302687,
+          "memoryUsage": 20328307.493430097,
+          "cacheHitRatio": 0.6324423105940511,
+          "bandwidthUsage": 789379.0873227413
+        },
+        "impact": {
+          "loadTimeImpact": "minimal",
+          "memoryImpact": "low",
+          "cacheEfficiency": "moderate",
+          "bandwidthImpact": "moderate"
+        }
+      },
+      "timestamp": 1759154784014
+    }
+  },
+  "summary": {
+    "totalTests": 4,
+    "successfulTests": 4,
+    "successRate": 100,
+    "totalStrategies": 16,
+    "successfulStrategies": 11,
+    "strategySuccessRate": 68.75,
+    "totalUpdatePromptEvents": 17,
+    "overallDuration": 25506
+  },
+  "recommendations": [
+    "✅ Update prompt trigger strategies are working effectively",
+    "🎯 Most effective strategy: service-worker-version-bump",
+    "📈 Strategy score: 18/10",
+    "✅ Cache freshness experiments are producing results",
+    "🚨 6 update prompt events triggered",
+    "✅ Complete investigation completed successfully",
+    "📊 4 investigation phases completed",
+    "⚡ Performance impact is minimal - safe for production",
+    "🔍 Continue monitoring update prompt frequency",
+    "🧪 Test across different browsers and devices",
+    "📊 Implement production monitoring for cache busting strategies",
+    "👥 Gather user feedback on update prompt experience"
+  ]
+}
