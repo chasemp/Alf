@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Settings - Improved Combo Display</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #8B4513; /* Dark brown background */
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .settings-container {
+            background: #A0522D; /* Slightly lighter brown */
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .settings-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .setting-group {
+            margin-bottom: 25px;
+        }
+
+        .setting-group-label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #FFD700; /* Gold color for labels */
+        }
+
+        /* Combo Display Section - Special styling */
+        .combo-display-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .combo-display-section .setting-group-label {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 0;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .radio-option:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .radio-option input[type="radio"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: #4A90E2;
+        }
+
+        .radio-option label {
+            cursor: pointer;
+            font-size: 14px;
+            flex: 1;
+        }
+
+        /* Regular checkbox settings */
+        .checkbox-setting {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .checkbox-setting input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: #4A90E2;
+        }
+
+        .checkbox-setting label {
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <button class="back-button">← Back to Game</button>
+        
+        <h1 class="settings-title">Game Settings</h1>
+
+        <!-- Combo Display Section - Now in its own UI element -->
+        <div class="combo-display-section">
+            <div class="setting-group-label">Combo Display</div>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="streak" name="combo-display" value="streak" checked>
+                    <label for="streak">Streak</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="cumulative" name="combo-display" value="cumulative">
+                    <label for="cumulative">Cumulative</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other settings -->
+        <div class="setting-group">
+            <div class="checkbox-setting">
+                <input type="checkbox" id="hints">
+                <label for="hints">Enable hints</label>
+            </div>
+            <div class="checkbox-setting">
+                <input type="checkbox" id="timer">
+                <label for="timer">Enable timer</label>
+            </div>
+            <div class="checkbox-setting">
+                <input type="checkbox" id="high-score">
+                <label for="high-score">Show current high score in header</label>
+            </div>
+            <div class="checkbox-setting">
+                <input type="checkbox" id="sound">
+                <label for="sound">Sound effects</label>
+            </div>
+            <div class="checkbox-setting">
+                <input type="checkbox" id="animations" checked>
+                <label for="animations">Animations</label>
+            </div>
+            <div class="checkbox-setting">
+                <input type="checkbox" id="particles" checked>
+                <label for="particles">Particle effects</label>
+            </div>
+            <div class="checkbox-setting">
+                <input type="checkbox" id="haptic" checked>
+                <label for="haptic">Haptic feedback</label>
+            </div>
+            <div class="checkbox-setting">
+                <input type="checkbox" id="autosave" checked>
+                <label for="autosave">Auto-save game</label>
+            </div>
+        </div>
+
+        <div class="copyright">© 2025 Chase Pettet</div>
+    </div>
+</body>
+</html>
