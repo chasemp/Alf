@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Pages PWA Cache Busting Research</title>
+  <meta name="description" content="Comprehensive research platform for testing cache busting strategies with GitHub Pages for PWA apps">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#ffffff">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: white;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    .strategies {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .strategy-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .strategy-card h3 {
+      margin-top: 0;
+      color: #ffd700;
+    }
+    .status {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .status.planned { background: #ffa500; }
+    .status.in-progress { background: #4caf50; }
+    .status.completed { background: #2196f3; }
+    .controls {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 0 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    .metrics {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .metrics h3 {
+      margin-top: 0;
+      color: #ffd700;
+    }
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🚀 Cache Busting Research</h1>
+      <p>Testing optimal strategies for GitHub Pages PWA cache management</p>
+    </div>
+
+    <div class="strategies">
+      <div class="strategy-card">
+        <h3>Server-Side Strategies <span class="status planned">Planned</span></h3>
+        <ul>
+          <li>Build-time versioning</li>
+          <li>GitHub Actions integration</li>
+          <li>Custom headers manipulation</li>
+          <li>CDN cache purging</li>
+        </ul>
+      </div>
+
+      <div class="strategy-card">
+        <h3>Client-Side Strategies <span class="status planned">Planned</span></h3>
+        <ul>
+          <li>Service Worker cache management</li>
+          <li>Runtime token-based busting</li>
+          <li>Dynamic import strategies</li>
+          <li>Cache-first vs. network-first</li>
+        </ul>
+      </div>
+
+      <div class="strategy-card">
+        <h3>Hybrid Strategies <span class="status planned">Planned</span></h3>
+        <ul>
+          <li>Version-aware service workers</li>
+          <li>Progressive cache updates</li>
+          <li>Selective cache invalidation</li>
+          <li>Context-aware busting</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" onclick="testCacheBusting()">Test Cache Busting</button>
+      <button class="btn" onclick="runBenchmarks()">Run Benchmarks</button>
+      <button class="btn" onclick="analyzePerformance()">Analyze Performance</button>
+      <button class="btn" onclick="clearAllCaches()">Clear All Caches</button>
+    </div>
+
+    <div class="metrics">
+      <h3>Performance Metrics</h3>
+      <div class="metric">
+        <span>Cache Hit Ratio:</span>
+        <span id="cache-hit-ratio">--</span>
+      </div>
+      <div class="metric">
+        <span>Load Time:</span>
+        <span id="load-time">--</span>
+      </div>
+      <div class="metric">
+        <span>Bandwidth Usage:</span>
+        <span id="bandwidth">--</span>
+      </div>
+      <div class="metric">
+        <span>Service Worker Status:</span>
+        <span id="sw-status">--</span>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
