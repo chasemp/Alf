@@ -1,0 +1,171 @@
+name: Cache Busting Research Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run tests daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+jobs:
+  test-cache-strategies:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run tests
+      run: npm test
+      
+    - name: Run linting
+      run: npm run lint
+      
+    - name: Build application
+      run: npm run build
+      
+    - name: Test build output
+      run: |
+        if [ ! -d "dist" ]; then
+          echo "Build failed - dist directory not found"
+          exit 1
+        fi
+        echo "Build successful - dist directory exists"
+        
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results
+        path: |
+          coverage/
+          test-results/
+        retention-days: 30
+
+  performance-benchmarks:
+    runs-on: ubuntu-latest
+    needs: test-cache-strategies
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run performance benchmarks
+      run: npm run benchmark
+      
+    - name: Analyze cache behavior
+      run: npm run analyze
+      
+    - name: Upload benchmark results
+      uses: actions/upload-artifact@v4
+      with:
+        name: benchmark-results
+        path: |
+          benchmark-results/
+          analysis-results/
+        retention-days: 30
+
+  deploy-research-site:
+    runs-on: ubuntu-latest
+    needs: [test-cache-strategies, performance-benchmarks]
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build application
+      run: npm run build
+      
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
+        cname: ${{ github.repository }}.github.io
+        
+    - name: Generate cache bust token
+      id: cache-bust
+      run: echo "token=$(date +%s)" >> $GITHUB_OUTPUT
+      
+    - name: Update cache bust token
+      run: |
+        echo "CACHE_BUST_TOKEN=${{ steps.cache-bust.outputs.token }}" >> $GITHUB_ENV
+        echo "Cache bust token: ${{ steps.cache-bust.outputs.token }}"
+
+  cache-strategy-analysis:
+    runs-on: ubuntu-latest
+    needs: [test-cache-strategies, performance-benchmarks]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run comprehensive analysis
+      run: |
+        npm run analyze
+        npm run benchmark
+        
+    - name: Generate research report
+      run: |
+        node scripts/generate-research-report.js
+        
+    - name: Upload research report
+      uses: actions/upload-artifact@v4
+      with:
+        name: research-report
+        path: research-report.md
+        retention-days: 90
+        
+    - name: Comment on PR with results
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const report = fs.readFileSync('research-report.md', 'utf8');
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `## Cache Busting Research Results\n\n${report}`
+          });
